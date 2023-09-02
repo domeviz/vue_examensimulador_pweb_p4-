@@ -16,6 +16,7 @@
 
 <script>
 import { ingresarProductoFachada } from '../helpers/ClienteProducto';
+import { obtenerTokenFachada } from '../../../helpers/ClienteToken'
 
 export default {
     data() {
@@ -36,7 +37,12 @@ export default {
                 stock: this.stock,
                 precio: this.precio
             }
-            await ingresarProductoFachada(data);
+            const user={
+                username:"dome",
+                password:"123"
+            }
+            const token=await obtenerTokenFachada(user);
+            ingresarProductoFachada(data,token);
             this.reset()
         },
         reset() {

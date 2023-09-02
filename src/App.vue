@@ -1,6 +1,9 @@
 <template>
   <!-- <IngresarProductosVue/> -->
-  <IngresarVentasVue/>
+  <!-- <IngresarVentasVue/> -->
+  <router-link to="/productos"><button>Productos</button></router-link>
+  <router-link to="/ventas"><button>Ventas</button></router-link>
+  <router-view></router-view>
 </template>
 
 <script>

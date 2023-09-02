@@ -4,8 +4,6 @@
         <input v-model="numeroVenta" type="text">
         <label for="">Cédula Cliente</label>
         <input v-model="cedulaCliente" type="text">
-        <!-- <label for="">Productos</label>
-        <input v-model="productos" type="text"> -->
         <button @click="ingresarVenta">Guardar</button>
     </div>
     <div class="form">
@@ -45,6 +43,7 @@
 <script>
 import { buscarProductoCodigoBarrasYCantidadFachada } from '@/modules/productos/helpers/ClienteProducto';
 import { ingresarVentaFachada } from '../helpers/ClienteVentas';
+import { obtenerTokenFachada } from '../../../helpers/ClienteToken'
 
 export default {
     data() {
@@ -64,7 +63,12 @@ export default {
                 cedulaCliente: this.cedulaCliente,
                 productos: this.productos
             }
-            ingresarVentaFachada(data);
+            const user={
+                username:"dome",
+                password:"123"
+            }
+            const token=await obtenerTokenFachada(user);
+            ingresarVentaFachada(data,token);
             this.reset()
         },
         reset() {
@@ -79,7 +83,12 @@ export default {
             const data = {
                 cantidad: this.cantidad
             }
-            var a= await buscarProductoCodigoBarrasYCantidadFachada(this.codigoBarras, data);
+            const user={
+                username:"dome",
+                password:"123"
+            }
+            const token=await obtenerTokenFachada(user);
+            var a= await buscarProductoCodigoBarrasYCantidadFachada(this.codigoBarras, data,token);
             if(a.cantidad==null){
                 alert('Producto no disponible')
             } else{
